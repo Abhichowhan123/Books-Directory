@@ -1,22 +1,19 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import connection from './database/db.js';
-import dotenv from 'dotenv'
-import Routes from './routes/route.js'
+// const connection = require ('./database/DB.js');
+import Routes from './src/book/routes.js'
 
 
-dotenv.config();
 
 const app  = express()
+const PORT= 8000;
 
+app.use(express.json());
 app.use(bodyParser.json({extended:true}));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use('/',Routes);
 
-const PORT= 8000;
-const username  = process.env.DB_USERNAME
-const password=  process.env.DB_PASSWORD
 
-connection(username,password);
+
 
 app.listen(PORT,()=> console.log(`server is running on Port ${PORT}`))
